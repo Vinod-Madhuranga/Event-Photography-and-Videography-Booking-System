@@ -6,16 +6,12 @@
         return; // Stop further execution
     }
 
-    // Get the admin's details from the session
+    // Get the admin's name from the session
     String adminName = (String) sessionObj.getAttribute("adminName");
     String adminEmail = (String) sessionObj.getAttribute("adminEmail");
     String adminFName = (String) sessionObj.getAttribute("adminFName");
     String adminLName = (String) sessionObj.getAttribute("adminLName");
-    // Assuming these are available in the session; if not, you'll need to add them
-    String adminUsername = (String) sessionObj.getAttribute("adminUsername");
-    String adminGender = (String) sessionObj.getAttribute("adminGender");
-    String adminPhone = (String) sessionObj.getAttribute("adminPhone");
-    String adminAddress = (String) sessionObj.getAttribute("adminAddress");
+
 %>
 
 <!DOCTYPE html>
@@ -28,69 +24,17 @@
     <meta name="description" content="Admin Profile for Event Photography and Videography Booking System">
     <meta name="author" content="Vinod Madhuranga">
 
+
     <title>Admin Profile</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-    <!-- Bootstrap CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles -->
-    <link href="css/admin.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="css/admin.css" rel="stylesheet">
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 
-    <!-- Custom CSS for glassmorphism effect -->
-    <style>
-        .profile-card {
-            background: rgba(78, 115, 223);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #fff;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .profile-card h3 {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .profile-field {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            padding: 10px;
-            margin-bottom: 10px;
-            color: #fff;
-            border: none;
-        }
-
-        .profile-field i {
-            margin-right: 10px;
-            color: #ccc;
-        }
-
-        .profile-field span {
-            flex: 1;
-        }
-
-        .edit-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: #fff;
-            border-radius: 10px;
-        }
-
-        .delete-btn {
-            border-radius: 10px;
-        }
-    </style>
 </head>
 
 <body id="page-top">
@@ -98,26 +42,41 @@
 <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
+        <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
         </a>
+
+        <!-- Divider -->
         <hr class="sidebar-divider my-0">
-        <li class="nav-item">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item ">
             <a class="nav-link" href="dashboard.jsp">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a>
         </li>
+
+        <!-- Divider -->
         <hr class="sidebar-divider">
-        <div class="sidebar-heading">Interface</div>
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Interface
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item active">
-            <a class="nav-link collapsed" href="profile.jsp">
-                <i class="fas fa-fw fa-user"></i>
+            <a class="nav-link collapsed" href="profile2.jsp">
+                <i class="fas fa-fw fa-user" ></i>
                 <span>Profile</span>
             </a>
         </li>
+
+        <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                aria-expanded="true" aria-controls="collapseUtilities">
@@ -135,8 +94,16 @@
                 </div>
             </div>
         </li>
+
+        <!-- Divider -->
         <hr class="sidebar-divider">
-        <div class="sidebar-heading">Addons</div>
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Addons
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                aria-expanded="true" aria-controls="collapsePages">
@@ -156,18 +123,24 @@
                 </div>
             </div>
         </li>
+
+        <!-- Nav Item - Charts -->
         <li class="nav-item">
             <a class="nav-link" href="charts.html">
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>Charts</span>
             </a>
         </li>
+
+        <!-- Nav Item - Tables -->
         <li class="nav-item">
             <a class="nav-link" href="tables.html">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Tables</span>
             </a>
         </li>
+
+        <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
     </ul>
     <!-- End of Sidebar -->
@@ -175,20 +148,27 @@
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
         <!-- Main Content -->
-        <div id="content">
+        <div id="content" >
             <!-- Topbar -->
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <!-- Sidebar Toggle (Topbar) -->
                 <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
                     <i class="fa fa-bars"></i>
                 </button>
+
+                <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
+
                     <div class="topbar-divider d-none d-sm-block"></div>
+
+                    <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= (adminName != null) ? adminName : "Admin" %></span>
                             <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                         </a>
+                        <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="#">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -212,107 +192,58 @@
                 </ul>
             </nav>
             <!-- End of Topbar -->
+        </div>
 
-            <!-- Profile Card -->
-            <div class="container mt-6 mb-4">
-                <div class="profile-card">
-                    <div class="profile-img-wrapper">
-                        <img id="profilePicture" src="img/undraw_profile.svg" alt="Profile Picture" class="profile-img">
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mb-5">
-                        <h3>My Profile</h3>
-                        <button class="btn edit-btn" onclick="enableEdit()">
-                            <i class="fas fa-edit"></i> Edit Profile
-                        </button>
-                    </div>
-                    <div class="row">
-                        <!-- Full Name -->
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label text-white">Full Name</label>
-                            <div class="profile-field">
-                                <i class="fas fa-user"></i>
-                                <span><%= (adminFName != null && adminLName != null) ? adminFName + " " + adminLName : "Full Name" %></span>
-                            </div>
-                        </div>
-                        <!-- Username -->
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label text-white">Username</label>
-                            <div class="profile-field">
-                                <i class="fas fa-user-circle"></i>
-                                <span><%= (adminUsername != null) ? adminUsername : "Username" %></span>
-                            </div>
-                        </div>
-                        <!-- Email -->
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label text-white">Email</label>
-                            <div class="profile-field">
-                                <i class="fas fa-envelope"></i>
-                                <span><%= (adminEmail != null) ? adminEmail : "Email" %></span>
-                            </div>
-                        </div>
-                        <!-- Gender -->
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label text-white">Gender</label>
-                            <div class="profile-field">
-                                <i class="fas fa-venus-mars"></i>
-                                <span><%= (adminGender != null) ? adminGender : "Gender" %></span>
-                            </div>
-                        </div>
-                        <!-- Phone -->
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label text-white">Phone</label>
-                            <div class="profile-field">
-                                <i class="fas fa-phone"></i>
-                                <span><%= (adminPhone != null) ? adminPhone : "Phone" %></span>
-                            </div>
-                        </div>
-                        <!-- Address -->
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label text-white">Address</label>
-                            <div class="profile-field">
-                                <i class="fas fa-home"></i>
-                                <span><%= (adminAddress != null) ? adminAddress : "Address" %></span>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-danger delete-btn mt-3" onclick="deleteProfile()">
-                        <i class="fas fa-trash"></i> Delete Profile
-                    </button>
+        <div class="container mt-5 mb-4" >
+            <div class="profile-card">
+                <div class="profile-img-wrapper">
+                    <img id="profilePicture" src="img/undraw_profile.svg" alt="Profile Picture" class="profile-img">
                 </div>
+                <h3 class="mt-1 mb-0 "><%= (adminName != null) ? adminName : "Admin" %></h3>
+                <p class="text-muted">Admin</p>
+
+                <form id="profileForm">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" value="<%= (adminEmail != null) ? adminEmail : "Email" %>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="cpass" class="form-label">Current Password</label>
+                        <input type="text" class="form-control" id="cpass" placeholder="Enter Current Password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="npass" class="form-label">New Password</label>
+                        <input type="text" class="form-control" id="npass" placeholder="Enter New Password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="rpass" class="form-label">Repeat Password</label>
+                        <input type="text" class="form-control" id="rpass" placeholder="Retype New Password">
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select rounded-pill" name="gendProfer" required>
+                            <option value="" disabled selected>Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                            <option value="prefer_not_to_say">Prefer not to say</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Update ile</button>
+                </form>
             </div>
         </div>
+
     </div>
 </div>
 
-<!-- Bootstrap core JavaScript -->
+<!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript Dependencies -->
 <script src="js/admin.min.js"></script>
 
-<!-- Custom JavaScript for Edit and Delete -->
-<script>
-    function enableEdit() {
-        // Redirect to an edit page or make fields editable
-        window.location.href = "editProfile.jsp"; // Replace with your edit page URL
-    }
-
-    function deleteProfile() {
-        if (confirm("Are you sure you want to delete your profile? This action cannot be undone.")) {
-            // Send a request to delete the profile
-            $.ajax({
-                url: 'DeleteProfileServlet', // Replace with your servlet URL
-                type: 'POST',
-                success: function(response) {
-                    alert('Profile deleted successfully!');
-                    window.location.href = "login.jsp"; // Redirect to login page after deletion
-                },
-                error: function() {
-                    alert('Error deleting profile. Please try again.');
-                }
-            });
-        }
-    }
-</script>
-
 </body>
+
 </html>
+

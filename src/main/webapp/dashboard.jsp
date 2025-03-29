@@ -7,7 +7,7 @@
   }
 
   // Get the admin's name from the session
-  String adminName = (String) sessionObj.getAttribute("adminName");
+  String userName = (String) sessionObj.getAttribute("userName");
 
 %>
 
@@ -76,7 +76,7 @@
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="temp.jsp">
+        <a class="nav-link collapsed" href="profile.jsp">
           <i class="fas fa-fw fa-wrench"></i>
           <span>Utilities</span>
         </a>
@@ -152,7 +152,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= (adminName != null) ? adminName : "Admin" %></span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= (userName != null) ? userName : "Admin" %></span>
                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
               </a>
               <!-- Dropdown - User Information -->

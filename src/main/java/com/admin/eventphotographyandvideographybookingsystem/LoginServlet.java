@@ -21,8 +21,13 @@ public class LoginServlet extends HttpServlet {
                 // Create session and store admin info
                 HttpSession session = request.getSession();
                 session.setAttribute("adminUser", admin);  // Store Admin object
-                session.setAttribute("adminName", admin.getUserName());
-                session.setAttribute("adminEmail", admin.getEmail());
+                session.setAttribute("fullName", admin.getFullName());
+                session.setAttribute("userName", admin.getUserName());
+                session.setAttribute("email", admin.getEmail());
+                session.setAttribute("gender", admin.getGender());
+                session.setAttribute("phone", admin.getPhone());
+                session.setAttribute("address", admin.getAddress());
+                session.setAttribute("password", admin.getPassword());
 
                 response.sendRedirect("dashboard.jsp");
             } else {

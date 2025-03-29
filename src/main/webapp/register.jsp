@@ -44,9 +44,9 @@
                 </div>
 
                 <div class="input-box">
-                    <input type="text" id="username username-input" minlength="5" maxlength="15" name="username"
+                    <input type="text" id="username username-input" minlength="5" maxlength="15" name="userName"
                            required placeholder=" ">
-                    <label id="username-label" for="username">Username</label>
+                    <label id="username-label" for="userName">Username</label>
                     <i class="icon fas fa-file-signature"></i>
                 </div>
 
@@ -82,14 +82,14 @@
                 </div>
 
                 <div class="input-box">
-                    <input type="password" id="password password-input" minlength="6" name="password" required
+                    <input type="password" id="password password-input" minlength="" name="password" required
                            placeholder=" ">
                     <label id="password-label" for="password">Password</label>
                     <i class="icon fas fa-lock"></i>
                 </div>
 
                 <div class="input-box">
-                    <input type="password" id="confirm-password-input" minlength="6" required placeholder=" ">
+                    <input type="password" id="confirm-password-input" minlength="" required placeholder=" ">
                     <label id="confirm-password-label">Confirm Password</label>
                     <i class="icon fas fa-lock"></i>
                     <span id="password-error"

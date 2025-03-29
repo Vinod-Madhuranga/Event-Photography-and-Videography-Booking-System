@@ -14,15 +14,18 @@ public class RegisterServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get form data
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
+        String fullName = request.getParameter("fullName");
+        String userName = request.getParameter("userName");
         String email = request.getParameter("email");
+        String gender = request.getParameter("gender");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
         String password = request.getParameter("password");
 
         // Save user data to a file
         try (FileWriter fileWriter = new FileWriter(FILE_PATH, true);
              PrintWriter printWriter = new PrintWriter(fileWriter)) {
-            printWriter.println(firstName + "," + lastName + "," + email + "," + password);
+            printWriter.println(fullName + "," + userName + "," + email + "," + gender + "," + phone + "," + address + "," + password);
         } catch (IOException e) {
             e.printStackTrace();
         }
