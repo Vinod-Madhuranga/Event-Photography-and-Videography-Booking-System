@@ -12,7 +12,8 @@
     <title>Register</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
 
     <!-- Custom styles -->
     <link href="css/main.css" rel="stylesheet">
@@ -39,20 +40,20 @@
                 <div class="input-box">
                     <input type="text" id="fullName name-input" minlength="5" maxlength="35" name="fullName" required
                            placeholder=" ">
-                    <label id="name-label" for="fullName">Full Name</label>
+                    <label id="name-label">Full Name</label>
                     <i class="icon fas fa-user"></i>
                 </div>
 
                 <div class="input-box">
                     <input type="text" id="username username-input" minlength="5" maxlength="15" name="userName"
                            required placeholder=" ">
-                    <label id="username-label" for="userName">Username</label>
+                    <label id="username-label">Username</label>
                     <i class="icon fas fa-file-signature"></i>
                 </div>
 
                 <div class="input-box">
                     <input type="text" id="email email-input" name="email" required placeholder=" ">
-                    <label id="email-label" for="email">Email</label>
+                    <label id="email-label">Email</label>
                     <i class="icon fas fa-envelope"></i>
                 </div>
 
@@ -62,29 +63,28 @@
                         <i class="icon fas fa-venus-mars"></i>
                     </div>
                     <div class="radio-group">
-                        <label><input type="radio" id="gender" name="gender" value="male" required> Male</label>
-                        <label><input type="radio" id="gender" name="gender" value="female" required> Female</label>
-                        <label><input type="radio" id="gender" name="gender" value="other" required> Other</label>
+                        <label><input type="radio" id="gender" name="gender" value="Male" required> Male</label>
+                        <label><input type="radio" id="gender" name="gender" value="Female" required> Female</label>
                     </div>
                 </div>
 
                 <div class="input-box">
                     <input type="number" id="phone phone-input" minlength="10" maxlength="10" name="phone" required
                            placeholder=" ">
-                    <label id="phone-label" for="phone">Phone</label>
+                    <label id="phone-label">Phone</label>
                     <i class="icon fas fa-phone"></i>
                 </div>
 
                 <div class="input-box">
                     <input type="text" id="address address-input" minlength="5" name="address" required placeholder=" ">
-                    <label id="address-label" for="address">Address</label>
+                    <label id="address-label">Address</label>
                     <i class="icon fas fa-house"></i>
                 </div>
 
                 <div class="input-box">
                     <input type="password" id="password password-input" minlength="" name="password" required
                            placeholder=" ">
-                    <label id="password-label" for="password">Password</label>
+                    <label id="password-label">Password</label>
                     <i class="icon fas fa-lock"></i>
                 </div>
 
@@ -117,7 +117,6 @@
                     </div>
 
                     <% } %>
-
                 </div>
                 </form>
             </div>

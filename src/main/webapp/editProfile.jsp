@@ -29,13 +29,15 @@
     <title>Admin Profile</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
 
     <!-- Custom styles -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="css/admin.css" rel="stylesheet">
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 
-    <!-- Custom CSS for glassmorphism effect -->
     <style>
         .profile-card {
             background: rgba(78, 115, 223);
@@ -65,6 +67,38 @@
             border: none;
         }
 
+        .profile-field-2 {
+            flex: 1;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 10px;
+            color: #fff;
+            border: none;
+            text-align: center;
+        }
+
+        .profile-select {
+            flex: 1;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 10px;
+            color: #fff;
+            border: none;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .profile-select option {
+            flex: 1;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.14);
+            border-radius: 10px;
+            color: #000000;
+            border: none;
+            text-align: center;
+            cursor: pointer;
+        }
+
         .profile-field i {
             margin-right: 10px;
             color: #ccc;
@@ -72,6 +106,13 @@
 
         .profile-field span {
             flex: 1;
+        }
+
+        .edit-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #fff;
+            border-radius: 10px;
         }
 
         .delete-btn {
@@ -176,7 +217,8 @@
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= (userName != null) ? userName : "Admin" %></span>
                             <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="#">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Profile
@@ -208,6 +250,9 @@
                     </div>
                     <div class="d-flex justify-content-between align-items-center mb-5">
                         <h3>Edit Profile</h3>
+                        <button type="submit" class="btn edit-btn">
+                            <i class="fas fa-edit"></i> Save Changes
+                        </button>
                     </div>
                     <div class="row">
                         <!-- Full Name -->
@@ -215,7 +260,8 @@
                             <label class="form-label text-white">Full Name</label>
                             <div class="profile-field">
                                 <i class="fas fa-user"></i>
-                                <span><%= (fullName != null) ? fullName : "Full Name" %></span>
+                                <input type="text" class="profile-field-2" id="fullName" name="fullName"
+                                       value="<%= (fullName != null) ? fullName : "Full Name" %>">
                             </div>
                         </div>
                         <!-- Username -->
@@ -223,7 +269,8 @@
                             <label class="form-label text-white">Username</label>
                             <div class="profile-field">
                                 <i class="fas fa-user-circle"></i>
-                                <span><%= (userName != null) ? userName : "Username" %></span>
+                                <input type="text" class="profile-field-2" id="username" name="username"
+                                       value="<%= (userName != null) ? userName : "Username" %>">
                             </div>
                         </div>
                         <!-- Email -->
@@ -231,7 +278,8 @@
                             <label class="form-label text-white">Email</label>
                             <div class="profile-field">
                                 <i class="fas fa-envelope"></i>
-                                <span><%= (email != null) ? email : "Email" %></span>
+                                <input type="email" class="profile-field-2" id="email" name="email"
+                                       value="<%= (email != null) ? email : "Email" %>">
                             </div>
                         </div>
                         <!-- Gender -->
@@ -239,7 +287,11 @@
                             <label class="form-label text-white">Gender</label>
                             <div class="profile-field">
                                 <i class="fas fa-venus-mars"></i>
-                                <span><%= (gender != null) ? gender : "Gender" %></span>
+                                <select class="profile-select" id="gender" name="gender">
+                                    <option value="Male" <%= "Male".equals(gender) ? "selected" : "" %>>Male</option>
+                                    <option value="Female" <%= "Female".equals(gender) ? "selected" : "" %>>Female
+                                    </option>
+                                </select>
                             </div>
                         </div>
                         <!-- Phone -->
@@ -247,7 +299,8 @@
                             <label class="form-label text-white">Phone</label>
                             <div class="profile-field">
                                 <i class="fas fa-phone"></i>
-                                <span><%= (phone != null) ? phone : "Phone" %></span>
+                                <input type="text" class="profile-field-2" id="phone" name="phone"
+                                       value="<%= (phone != null) ? phone : "Phone" %>">
                             </div>
                         </div>
                         <!-- Address -->
@@ -255,46 +308,26 @@
                             <label class="form-label text-white">Address</label>
                             <div class="profile-field">
                                 <i class="fas fa-home"></i>
-                                <span><%= (address != null) ? address : "Address" %></span>
+                                <input type="text" class="profile-field-2" id="address" name="address"
+                                       value="<%= (address != null) ? address : "Address" %>">
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-danger delete-btn mt-3" onclick="deleteProfile()">
-                        <i class="fas fa-trash"></i> Delete Profile
-                    </button>
+                    <a href="profile.jsp" class="btn btn-danger delete-btn mt-3">Cancel</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Bootstrap Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript Dependencies -->
 <script src="js/admin.min.js"></script>
-
-<!-- Custom JavaScript for Edit and Delete -->
-<script>
-    function enableEdit() {
-        window.location.href = "editProfile.jsp";
-    }
-
-    function deleteProfile() {
-        if (confirm("Are you sure you want to delete your profile? This action cannot be undone.")) {
-            $.ajax({
-                url: 'DeleteProfileServlet',
-                type: 'POST',
-                success: function(response) {
-                    alert('Profile deleted successfully!');
-                    window.location.href = "login.jsp";
-                },
-                error: function() {
-                    alert('Error deleting profile. Please try again.');
-                }
-            });
-        }
-    }
-</script>
 
 </body>
 </html>
