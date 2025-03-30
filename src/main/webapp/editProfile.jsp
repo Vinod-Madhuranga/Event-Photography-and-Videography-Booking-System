@@ -303,13 +303,13 @@
                                            value="<%= (phone != null) ? phone : "Phone" %>">
                                 </div>
                             </div>
-                            <!-- Address -->
+                            <!-- Password -->
                             <div class="col-md-4 mb-3">
-                                <label class="form-label text-white">Address</label>
+                                <label class="form-label text-white">Password</label>
                                 <div class="profile-field">
                                     <i class="fas fa-home"></i>
-                                    <input type="text" class="profile-field-2" id="address" name="address"
-                                           value="<%= (address != null) ? address : "Address" %>">
+                                    <input type="password" class="profile-field-2" id="password" name="password"
+                                           value="<%= (password != null) ? password : "Password" %>">
                                 </div>
                             </div>
                         </div>

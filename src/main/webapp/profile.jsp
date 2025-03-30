@@ -263,12 +263,12 @@
                                 <span><%= (phone != null) ? phone : "Phone" %></span>
                             </div>
                         </div>
-                        <!-- Address -->
+                        <!-- Password -->
                         <div class="col-md-4 mb-3">
-                            <label class="form-label text-white">Address</label>
+                            <label class="form-label text-white">Password</label>
                             <div class="profile-field">
                                 <i class="fas fa-home"></i>
-                                <span><%= (address != null) ? address : "Address" %></span>
+                                <span><%= (password != null) ? password : "Password" %></span>
                             </div>
                         </div>
                     </div>
