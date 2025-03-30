@@ -299,7 +299,7 @@
     function deleteProfile() {
         if (confirm("Are you sure you want to delete your profile? This action cannot be undone.")) {
             $.ajax({
-                url: 'DeleteProfileServlet',
+                url: "DeleteProfileServlet",
                 type: 'POST',
                 success: function (response) {
                     alert('Profile deleted successfully!');

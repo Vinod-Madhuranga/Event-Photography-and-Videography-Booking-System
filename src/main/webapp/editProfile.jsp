@@ -245,75 +245,76 @@
             <!-- Profile Card -->
             <div class="container mt-6 mb-4">
                 <div class="profile-card">
-                    <div class="profile-img-wrapper">
-                        <img id="profilePicture" src="img/undraw_profile.svg" alt="Profile Picture" class="profile-img">
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mb-5">
-                        <h3>Edit Profile</h3>
-                        <button type="submit" class="btn edit-btn">
-                            <i class="fas fa-edit"></i> Save Changes
-                        </button>
-                    </div>
-                    <div class="row">
-                        <!-- Full Name -->
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label text-white">Full Name</label>
-                            <div class="profile-field">
-                                <i class="fas fa-user"></i>
-                                <input type="text" class="profile-field-2" id="fullName" name="fullName"
-                                       value="<%= (fullName != null) ? fullName : "Full Name" %>">
+                    <form action="EditProfileServlet" method="post">
+                        <div class="profile-img-wrapper">
+                            <img id="profilePicture" src="img/undraw_profile.svg" alt="Profile Picture" class="profile-img">
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-5">
+                            <h3>Edit Profile</h3>
+                            <button type="submit" class="btn edit-btn">
+                                <i class="fas fa-edit"></i> Save Changes
+                            </button>
+                        </div>
+                        <div class="row">
+                            <!-- Full Name -->
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label text-white">Full Name</label>
+                                <div class="profile-field">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" class="profile-field-2" id="fullName" name="fullName"
+                                           value="<%= (fullName != null) ? fullName : "Full Name" %>">
+                                </div>
+                            </div>
+                            <!-- Username -->
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label text-white">Username</label>
+                                <div class="profile-field">
+                                    <i class="fas fa-user-circle"></i>
+                                    <span><%= (userName != null) ? userName : "Username" %></span>
+                                </div>
+                            </div>
+                            <!-- Email -->
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label text-white">Email</label>
+                                <div class="profile-field">
+                                    <i class="fas fa-envelope"></i>
+                                    <input type="email" class="profile-field-2" id="email" name="email"
+                                           value="<%= (email != null) ? email : "Email" %>">
+                                </div>
+                            </div>
+                            <!-- Gender -->
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label text-white">Gender</label>
+                                <div class="profile-field">
+                                    <i class="fas fa-venus-mars"></i>
+                                    <select class="profile-select" id="gender" name="gender">
+                                        <option value="Male" <%= "Male".equals(gender) ? "selected" : "" %>>Male</option>
+                                        <option value="Female" <%= "Female".equals(gender) ? "selected" : "" %>>Female
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Phone -->
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label text-white">Phone</label>
+                                <div class="profile-field">
+                                    <i class="fas fa-phone"></i>
+                                    <input type="text" class="profile-field-2" id="phone" name="phone"
+                                           value="<%= (phone != null) ? phone : "Phone" %>">
+                                </div>
+                            </div>
+                            <!-- Address -->
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label text-white">Address</label>
+                                <div class="profile-field">
+                                    <i class="fas fa-home"></i>
+                                    <input type="text" class="profile-field-2" id="address" name="address"
+                                           value="<%= (address != null) ? address : "Address" %>">
+                                </div>
                             </div>
                         </div>
-                        <!-- Username -->
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label text-white">Username</label>
-                            <div class="profile-field">
-                                <i class="fas fa-user-circle"></i>
-                                <input type="text" class="profile-field-2" id="username" name="username"
-                                       value="<%= (userName != null) ? userName : "Username" %>">
-                            </div>
-                        </div>
-                        <!-- Email -->
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label text-white">Email</label>
-                            <div class="profile-field">
-                                <i class="fas fa-envelope"></i>
-                                <input type="email" class="profile-field-2" id="email" name="email"
-                                       value="<%= (email != null) ? email : "Email" %>">
-                            </div>
-                        </div>
-                        <!-- Gender -->
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label text-white">Gender</label>
-                            <div class="profile-field">
-                                <i class="fas fa-venus-mars"></i>
-                                <select class="profile-select" id="gender" name="gender">
-                                    <option value="Male" <%= "Male".equals(gender) ? "selected" : "" %>>Male</option>
-                                    <option value="Female" <%= "Female".equals(gender) ? "selected" : "" %>>Female
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- Phone -->
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label text-white">Phone</label>
-                            <div class="profile-field">
-                                <i class="fas fa-phone"></i>
-                                <input type="text" class="profile-field-2" id="phone" name="phone"
-                                       value="<%= (phone != null) ? phone : "Phone" %>">
-                            </div>
-                        </div>
-                        <!-- Address -->
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label text-white">Address</label>
-                            <div class="profile-field">
-                                <i class="fas fa-home"></i>
-                                <input type="text" class="profile-field-2" id="address" name="address"
-                                       value="<%= (address != null) ? address : "Address" %>">
-                            </div>
-                        </div>
-                    </div>
-                    <a href="profile.jsp" class="btn btn-danger delete-btn mt-3">Cancel</a>
+                        <a href="profile.jsp" class="btn btn-danger delete-btn mt-3">Cancel</a>
+                    </form>
                 </div>
             </div>
         </div>

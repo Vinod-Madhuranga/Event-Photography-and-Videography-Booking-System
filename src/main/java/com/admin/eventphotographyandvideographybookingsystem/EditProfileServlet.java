@@ -1,5 +1,13 @@
 package com.admin.eventphotographyandvideographybookingsystem;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.File;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import java.io.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -51,7 +59,6 @@ public class EditProfileServlet extends HttpServlet {
         if (file.delete() && tempFile.renameTo(file)) {
             // Update session attributes
             session.setAttribute("fullName", fullName);
-            session.setAttribute("userName", userName);
             session.setAttribute("email", email);
             session.setAttribute("gender", gender);
             session.setAttribute("phone", phone);
