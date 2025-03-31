@@ -7,6 +7,13 @@ import javax.servlet.http.*;
 
 @WebServlet("/DeleteProfileServlet")
 public class DeleteProfileServlet extends HttpServlet {
+    private static final String CREDENTIALS_FILE_PATH = "E:/OneDrive - Sri Lanka Institute of Information Technology/Y1S2/OOP/Project/Admin Management/Event Photography and Videography Booking System/src/main/webapp/Database/admin_credentials.txt";
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response); // Delegate to doPost for simplicity
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
@@ -16,51 +23,58 @@ public class DeleteProfileServlet extends HttpServlet {
         }
 
         String userName = (String) session.getAttribute("userName");
-
-        // Get the correct file path dynamically (NO CONCATENATION)
-        String filePath = getServletContext().getRealPath("E:/OneDrive - Sri Lanka Institute of Information Technology/Y1S2/OOP/Project/Admin Management/Event Photography and Videography Booking System/src/main/webapp/Database/admin_credentials.txt");
-        if (filePath == null || filePath.isEmpty()) {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "File path is invalid.");
+        if (userName == null || userName.trim().isEmpty()) {
+            response.sendRedirect("login.jsp");
             return;
         }
 
+        String filePath = getServletContext().getRealPath(CREDENTIALS_FILE_PATH);
         File file = new File(filePath);
         File tempFile = new File(file.getAbsolutePath() + ".tmp");
-
-        // Check if the file exists before processing
-        if (!file.exists()) {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Admin credentials file not found.");
-            return;
-        }
-
         boolean isDeleted = false;
+        String errorMessage = null;
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(file));
-             PrintWriter writer = new PrintWriter(new FileWriter(tempFile))) {
+        if (!file.exists()) {
+            errorMessage = "Admin credentials file not found.";
+        } else {
+            try (BufferedReader reader = new BufferedReader(new FileReader(file));
+                 PrintWriter writer = new PrintWriter(new FileWriter(tempFile))) {
 
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] userData = line.split(",");
-                if (userData.length > 1 && userData[1].equals(userName)) {
-                    isDeleted = true; // Mark that the profile was found and deleted
-                    continue; // Skip writing this line to remove the profile
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] userData = line.split(",");
+                    if (userData.length > 1 && userData[1].trim().equals(userName.trim())) {
+                        isDeleted = true;
+                        continue;
+                    }
+                    writer.println(line);
                 }
-                writer.println(line);
+            } catch (Exception e) {
+                errorMessage = "Error processing file: " + e.getMessage();
+            }
+
+            if (isDeleted) {
+                try {
+                    if (file.delete() && tempFile.renameTo(file)) {
+                        session.invalidate();
+                    } else {
+                        errorMessage = "Failed to update credentials file.";
+                    }
+                } catch (Exception e) {
+                    errorMessage = "Error updating file: " + e.getMessage();
+                }
+            } else {
+                tempFile.delete();
+                errorMessage = "User profile not found in credentials file.";
             }
         }
 
-        // If user was found and deleted, update the file
-        if (isDeleted) {
-            if (file.delete() && tempFile.renameTo(file)) {
-                session.invalidate(); // End the session
-                response.sendRedirect("login.jsp");
-            } else {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to delete profile.");
-            }
+        // Redirect to a result page with a parameter indicating success or failure
+        if (isDeleted && errorMessage == null) {
+            response.sendRedirect("deleteResult.jsp?status=success");
         } else {
-            // If no matching user was found, delete the temp file and send an error response
-            tempFile.delete();
-            response.sendError(HttpServletResponse.SC_NOT_FOUND, "User profile not found.");
+            response.sendRedirect("deleteResult.jsp?status=error&message=" +
+                    java.net.URLEncoder.encode(errorMessage != null ? errorMessage : "Failed to delete profile.", "UTF-8"));
         }
     }
 }

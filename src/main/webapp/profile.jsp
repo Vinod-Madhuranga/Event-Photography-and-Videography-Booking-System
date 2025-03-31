@@ -296,21 +296,50 @@
     }
 
     function deleteProfile() {
-        if (confirm("Are you sure you want to delete your profile? This action cannot be undone.")) {
-            $.ajax({
-                url: "DeleteProfileServlet",
-                type: 'POST',
-                success: function (response) {
-                    alert('Profile deleted successfully!');
-                    window.location.href = "login.jsp";
-                },
-                error: function () {
-                    alert('Error deleting profile. Please try again.');
-                }
-            });
-        }
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ff4444',
+            cancelButtonColor: '#666',
+            confirmButtonText: 'Yes, delete it!',
+            customClass: {
+                popup: 'animated fadeInDown'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "DeleteProfileServlet",
+                    type: 'POST',
+                    success: function(response) {
+                        Swal.fire({
+                            title: 'Deleted!',
+                            text: 'Your profile has been deleted.',
+                            icon: 'success',
+                            confirmButtonColor: '#3085d6',
+                            customClass: {
+                                popup: 'animated fadeOutUp'
+                            }
+                        }).then(() => {
+                            window.location.href = "login.jsp";
+                        });
+                    },
+                    error: function() {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Failed to delete profile. Please try again.',
+                            icon: 'error',
+                            confirmButtonColor: '#ff4444'
+                        });
+                    }
+                });
+            }
+        });
     }
+
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 </html>
