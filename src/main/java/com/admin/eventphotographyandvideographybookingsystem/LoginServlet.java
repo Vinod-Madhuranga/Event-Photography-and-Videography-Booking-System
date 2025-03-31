@@ -26,7 +26,6 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("email", admin.getEmail());
                 session.setAttribute("gender", admin.getGender());
                 session.setAttribute("phone", admin.getPhone());
-                session.setAttribute("address", admin.getAddress());
                 session.setAttribute("password", admin.getPassword());
 
                 response.sendRedirect("dashboard.jsp");

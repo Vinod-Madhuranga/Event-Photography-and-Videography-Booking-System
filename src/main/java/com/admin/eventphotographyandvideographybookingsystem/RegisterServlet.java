@@ -18,13 +18,12 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         String gender = request.getParameter("gender");
         String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
         String password = request.getParameter("password");
 
         // Save user data to a file
         try (FileWriter fileWriter = new FileWriter(FILE_PATH, true);
              PrintWriter printWriter = new PrintWriter(fileWriter)) {
-            printWriter.println(fullName + "," + userName + "," + email + "," + gender + "," + phone + "," + address + "," + password);
+            printWriter.println(fullName + "," + userName + "," + email + "," + gender + "," + phone + "," + password);
         } catch (IOException e) {
             e.printStackTrace();
         }

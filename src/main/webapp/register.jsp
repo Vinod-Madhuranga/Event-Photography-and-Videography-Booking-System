@@ -33,8 +33,7 @@
     <div class="logreg-box">
         <div class="form-container active">
             <div class="form-box">
-                <form class="user" action="RegisterServlet" method="post"
-                ">
+                <form class="user" action="RegisterServlet" method="post">
                 <h2>Create an Account!</h2>
 
                 <div class="input-box">
@@ -73,12 +72,6 @@
                            placeholder=" ">
                     <label id="phone-label">Phone</label>
                     <i class="icon fas fa-phone"></i>
-                </div>
-
-                <div class="input-box">
-                    <input type="text" id="address address-input" minlength="5" name="address" required placeholder=" ">
-                    <label id="address-label">Address</label>
-                    <i class="icon fas fa-house"></i>
                 </div>
 
                 <div class="input-box">

@@ -12,18 +12,17 @@ public class FileReaderUtil {
 
             while ((line = reader.readLine()) != null) {
                 String[] credentials = line.split(",");
-                if (credentials.length == 7){
+                if (credentials.length == 6){
                     String fullName = credentials[0].trim();
                     String userName = credentials[1].trim();
                     String email = credentials[2].trim();
                     String gender = credentials[3].trim();
                     String phone = credentials[4].trim();
-                    String address = credentials[5].trim();
-                    String password = credentials[6].trim();
+                    String password = credentials[5].trim();
 
                     // Check if email and password match
                     if (email.equalsIgnoreCase(inputEmail) && password.equals(inputPassword)) {
-                        return new Admin(fullName, userName, email, gender, phone, address, password);
+                        return new Admin(fullName, userName, email, gender, phone, password);
                     }
                 }
             }

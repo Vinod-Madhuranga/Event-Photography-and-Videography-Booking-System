@@ -12,7 +12,6 @@
     String email = (String) sessionObj.getAttribute("email");
     String gender = (String) sessionObj.getAttribute("gender");
     String phone = (String) sessionObj.getAttribute("phone");
-    String address = (String) sessionObj.getAttribute("address");
     String password = (String) sessionObj.getAttribute("password");
 %>
 
