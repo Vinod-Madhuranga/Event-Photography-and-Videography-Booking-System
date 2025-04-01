@@ -303,40 +303,29 @@
             showCancelButton: true,
             confirmButtonColor: '#ff4444',
             cancelButtonColor: '#666',
-            confirmButtonText: 'Yes, delete it!',
-            customClass: {
-                popup: 'animated fadeInDown'
-            }
+            confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
                     url: "DeleteProfileServlet",
                     type: 'POST',
                     success: function(response) {
-                        Swal.fire({
-                            title: 'Deleted!',
-                            text: 'Your profile has been deleted.',
-                            icon: 'success',
-                            confirmButtonColor: '#3085d6',
-                            customClass: {
-                                popup: 'animated fadeOutUp'
-                            }
-                        }).then(() => {
-                            window.location.href = "login.jsp";
-                        });
+                        if (response === "success") {
+                            Swal.fire('Deleted!', 'Your profile has been deleted.', 'success').then(() => {
+                                window.location.href = "login.jsp";
+                            });
+                        } else {
+                            Swal.fire('Error!', 'Failed to delete profile.', 'error');
+                        }
                     },
                     error: function() {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'Failed to delete profile. Please try again.',
-                            icon: 'error',
-                            confirmButtonColor: '#ff4444'
-                        });
+                        Swal.fire('Error!', 'Something went wrong.', 'error');
                     }
                 });
             }
         });
     }
+
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
