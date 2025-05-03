@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ page import="com.admin.util.FileHandler" %>
-<%@ page import="com.admin.model.Booking" %>
+<%@ page import="com.admin.model.User" %>
 <%@ page import="java.util.List" %>
 <%
   HttpSession sessionObj = request.getSession(false);
@@ -10,7 +10,7 @@
   }
 
   String userName = (String) sessionObj.getAttribute("userName");
-  List<Booking> bookings = FileHandler.loadBookings();
+  List<User> users = FileHandler.loadUsers();
 %>
 
 <!DOCTYPE html>
@@ -19,7 +19,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>View All Bookings</title>
+    <title>Manage Users</title>
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/admin.css" rel="stylesheet">
@@ -74,7 +74,7 @@
             </div>
 
             <!-- Nav Item - Bookings -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="bookings.jsp">
                     <i class="fas fa-fw fa-calendar"></i>
                     <span>View All Bookings</span>
@@ -82,7 +82,7 @@
             </li>
 
             <!-- Nav Item - Users -->
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="users.jsp">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Manage Users</span>
@@ -143,36 +143,41 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <h1 class="h3 mb-4 text-gray-800">All Bookings</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Manage Users</h1>
                     
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Booking List</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">User List</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Booking ID</th>
-                                            <th>Customer Name</th>
-                                            <th>Event Type</th>
-                                            <th>Event Date</th>
-                                            <th>Location</th>
-                                            <th>Payment</th>
+                                            <th>User ID</th>
+                                            <th>Username</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
                                             <th>Status</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% for (Booking booking : bookings) { %>
+                                        <% for (User user : users) { %>
                                             <tr>
-                                                <td><%= booking.getBookingId() %></td>
-                                                <td><%= booking.getCustomerName() %></td>
-                                                <td><%= booking.getEventType() %></td>
-                                                <td><%= booking.getEventDate() %></td>
-                                                <td><%= booking.getLocation() %></td>
-                                                <td>$<%= String.format("%.2f", booking.getPayment()) %></td>
-                                                <td><%= booking.getStatus() %></td>
+                                                <td><%= user.getUserId() %></td>
+                                                <td><%= user.getUsername() %></td>
+                                                <td><%= user.getEmail() %></td>
+                                                <td><%= user.getRole() %></td>
+                                                <td><%= user.getStatus() %></td>
+                                                <td>
+                                                    <button class="btn btn-primary btn-sm" onclick="editUser('<%= user.getUserId() %>')">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </button>
+                                                    <button class="btn btn-danger btn-sm" onclick="deleteUser('<%= user.getUserId() %>')">
+                                                        <i class="fas fa-trash"></i> Delete
+                                                    </button>
+                                                </td>
                                             </tr>
                                         <% } %>
                                     </tbody>
@@ -193,5 +198,18 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/admin.min.js"></script>
+    <script>
+        function editUser(userId) {
+            // Implement edit functionality
+            alert('Edit user: ' + userId);
+        }
+
+        function deleteUser(userId) {
+            if (confirm('Are you sure you want to delete this user?')) {
+                // Implement delete functionality
+                alert('Delete user: ' + userId);
+            }
+        }
+    </script>
 </body>
-</html>
+</html> 
