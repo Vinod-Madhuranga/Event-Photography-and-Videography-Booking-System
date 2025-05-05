@@ -132,53 +132,48 @@
             </div>
         </a>
         <hr class="sidebar-divider my-0">
+        <hr class="sidebar-divider">
+        <div class="sidebar-heading">
+            Interface
+        </div>
         <li class="nav-item">
             <a class="nav-link" href="dashboard.jsp">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a>
         </li>
-        <hr class="sidebar-divider">
-        <div class="sidebar-heading">Interface</div>
         <li class="nav-item active">
             <a class="nav-link collapsed" href="profile.jsp">
                 <i class="fas fa-fw fa-user"></i>
                 <span>Profile</span>
             </a>
         </li>
-
-        <!-- Divider -->
         <hr class="sidebar-divider">
-
-        <!-- Heading -->
         <div class="sidebar-heading">
             Management
         </div>
-
-        <!-- Nav Item - Bookings -->
         <li class="nav-item">
             <a class="nav-link" href="bookings.jsp">
                 <i class="fas fa-fw fa-calendar"></i>
                 <span>View All Bookings</span>
             </a>
         </li>
-
-        <!-- Nav Item - Users -->
         <li class="nav-item">
             <a class="nav-link" href="users.jsp">
                 <i class="fas fa-fw fa-users"></i>
-                <span>Manage Users</span>
+                <span>Manage <br>Users</span>
             </a>
         </li>
-
-        <!-- Nav Item - Reports -->
+        <hr class="sidebar-divider">
+        <div class="sidebar-heading">
+            Analytics
+        </div>
         <li class="nav-item">
-            <a class="nav-link" href="reports.jsp">
-                <i class="fas fa-fw fa-chart-bar"></i>
-                <span>Generate Reports</span>
+            <a class="nav-link" href="analytics.jsp">
+                <i class="fas fa-fw fa-chart-line"></i>
+                <span>Analytics</span>
             </a>
         </li>
-
         <hr class="sidebar-divider d-none d-md-block">
     </ul>
     <!-- End of Sidebar -->

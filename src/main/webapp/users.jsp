@@ -44,14 +44,6 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="dashboard.jsp">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -60,10 +52,18 @@
                 Interface
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="dashboard.jsp">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Profile -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="profile.jsp">
-                    <i class="fas fa-fw fa-user" ></i>
+                    <i class="fas fa-fw fa-user"></i>
                     <span>Profile</span>
                 </a>
             </li>
@@ -88,20 +88,28 @@
             <li class="nav-item active">
                 <a class="nav-link" href="users.jsp">
                     <i class="fas fa-fw fa-users"></i>
-                    <span>Manage Users</span>
-                </a>
-            </li>
-
-            <!-- Nav Item - Reports -->
-            <li class="nav-item">
-                <a class="nav-link" href="reports.jsp">
-                    <i class="fas fa-fw fa-chart-bar"></i>
-                    <span>Generate Reports</span>
+                    <span>Manage <br>Users</span>
                 </a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Analytics
+            </div>
+
+            <!-- Nav Item - Analytics -->
+            <li class="nav-item">
+                <a class="nav-link" href="analytics.jsp">
+                    <i class="fas fa-fw fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
         </ul>
         <!-- End of Sidebar -->
 
