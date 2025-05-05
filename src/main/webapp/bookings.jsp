@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
-<%@ page import="com.admin.util.FileHandler" %>
 <%@ page import="com.admin.model.Booking" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <%
   HttpSession sessionObj = request.getSession(false);
   if (sessionObj == null || sessionObj.getAttribute("adminUser") == null) {
@@ -10,7 +10,11 @@
   }
 
   String userName = (String) sessionObj.getAttribute("userName");
-  List<Booking> bookings = FileHandler.loadBookings();
+  List<Booking> bookings = (List<Booking>) request.getAttribute("bookings");
+  if (bookings == null) {
+    response.sendRedirect("BookingServlet?action=list");
+    return;
+  }
 %>
 
 <!DOCTYPE html>
@@ -143,15 +147,16 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <h1 class="h3 mb-4 text-gray-800">All Bookings</h1>
+                    <h1 class="h3 mb-4 text-gray-800">View All Bookings</h1>
                     
+                    <!-- Bookings Table -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Booking List</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">All Bookings</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="bookingsTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>Booking ID</th>
@@ -161,19 +166,32 @@
                                             <th>Location</th>
                                             <th>Payment</th>
                                             <th>Status</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <% for (Booking booking : bookings) { %>
-                                            <tr>
-                                                <td><%= booking.getBookingId() %></td>
-                                                <td><%= booking.getCustomerName() %></td>
-                                                <td><%= booking.getEventType() %></td>
-                                                <td><%= booking.getEventDate() %></td>
-                                                <td><%= booking.getLocation() %></td>
-                                                <td>$<%= String.format("%.2f", booking.getPayment()) %></td>
-                                                <td><%= booking.getStatus() %></td>
-                                            </tr>
+                                        <tr>
+                                            <td><%= booking.getBookingId() %></td>
+                                            <td><%= booking.getCustomerName() %></td>
+                                            <td><%= booking.getEventType() %></td>
+                                            <td><%= booking.getEventDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) %></td>
+                                            <td><%= booking.getLocation() %></td>
+                                            <td>$<%= String.format("%.2f", booking.getPayment()) %></td>
+                                            <td><%= booking.getStatus() %></td>
+                                            <td>
+                                                <form action="BookingServlet" method="post" style="display: inline;">
+                                                    <input type="hidden" name="action" value="update">
+                                                    <input type="hidden" name="bookingId" value="<%= booking.getBookingId() %>">
+                                                    <select name="status" class="form-control" onchange="this.form.submit()">
+                                                        <option value="PENDING" <%= "PENDING".equals(booking.getStatus()) ? "selected" : "" %>>Pending</option>
+                                                        <option value="CONFIRMED" <%= "CONFIRMED".equals(booking.getStatus()) ? "selected" : "" %>>Confirmed</option>
+                                                        <option value="COMPLETED" <%= "COMPLETED".equals(booking.getStatus()) ? "selected" : "" %>>Completed</option>
+                                                        <option value="CANCELLED" <%= "CANCELLED".equals(booking.getStatus()) ? "selected" : "" %>>Cancelled</option>
+                                                    </select>
+                                                </form>
+                                            </td>
+                                        </tr>
                                         <% } %>
                                     </tbody>
                                 </table>
@@ -193,5 +211,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/admin.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#bookingsTable').DataTable();
+        });
+    </script>
 </body>
 </html>

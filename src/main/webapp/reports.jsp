@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
-<%@ page import="com.admin.util.FileHandler" %>
 <%
   HttpSession sessionObj = request.getSession(false);
   if (sessionObj == null || sessionObj.getAttribute("adminUser") == null) {
@@ -8,7 +7,16 @@
   }
 
   String userName = (String) sessionObj.getAttribute("userName");
-  String report = FileHandler.generateReport();
+  String report = (String) request.getAttribute("report");
+  String totalBookings = (String) request.getAttribute("totalBookings");
+  String completedBookings = (String) request.getAttribute("completedBookings");
+  String totalEarnings = (String) request.getAttribute("totalEarnings");
+  
+  // If attributes are not set, redirect to ReportServlet
+  if (report == null) {
+    response.sendRedirect("ReportServlet");
+    return;
+  }
 %>
 
 <!DOCTYPE html>
@@ -153,7 +161,7 @@
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Total Earnings (20% of payments)</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <%= report.split("\n")[2].split(":")[1].trim() %>
+                                                <%= totalEarnings %>
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -173,7 +181,7 @@
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Total Bookings</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <%= report.split("\n")[0].split(":")[1].trim() %>
+                                                <%= totalBookings %>
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -193,7 +201,7 @@
                                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                                 Completed Bookings</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <%= report.split("\n")[1].split(":")[1].trim() %>
+                                                <%= completedBookings %>
                                             </div>
                                         </div>
                                         <div class="col-auto">

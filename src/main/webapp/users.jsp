@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
-<%@ page import="com.admin.util.FileHandler" %>
 <%@ page import="com.admin.model.User" %>
 <%@ page import="java.util.List" %>
 <%
@@ -10,7 +9,11 @@
   }
 
   String userName = (String) sessionObj.getAttribute("userName");
-  List<User> users = FileHandler.loadUsers();
+  List<User> users = (List<User>) request.getAttribute("users");
+  if (users == null) {
+    response.sendRedirect("UserServlet?action=list");
+    return;
+  }
 %>
 
 <!DOCTYPE html>
@@ -145,13 +148,14 @@
                 <div class="container-fluid">
                     <h1 class="h3 mb-4 text-gray-800">Manage Users</h1>
                     
+                    <!-- Users Table -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">User List</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">All Users</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="usersTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>User ID</th>
@@ -164,21 +168,24 @@
                                     </thead>
                                     <tbody>
                                         <% for (User user : users) { %>
-                                            <tr>
-                                                <td><%= user.getUserId() %></td>
-                                                <td><%= user.getUsername() %></td>
-                                                <td><%= user.getEmail() %></td>
-                                                <td><%= user.getRole() %></td>
-                                                <td><%= user.getStatus() %></td>
-                                                <td>
-                                                    <button class="btn btn-primary btn-sm" onclick="editUser('<%= user.getUserId() %>')">
-                                                        <i class="fas fa-edit"></i> Edit
-                                                    </button>
-                                                    <button class="btn btn-danger btn-sm" onclick="deleteUser('<%= user.getUserId() %>')">
-                                                        <i class="fas fa-trash"></i> Delete
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td><%= user.getUserId() %></td>
+                                            <td><%= user.getUsername() %></td>
+                                            <td><%= user.getEmail() %></td>
+                                            <td><%= user.getRole() %></td>
+                                            <td><%= user.getStatus() %></td>
+                                            <td>
+                                                <form action="UserServlet" method="post" style="display: inline;">
+                                                    <input type="hidden" name="action" value="update">
+                                                    <input type="hidden" name="userId" value="<%= user.getUserId() %>">
+                                                    <select name="status" class="form-control" onchange="this.form.submit()">
+                                                        <option value="ACTIVE" <%= "ACTIVE".equals(user.getStatus()) ? "selected" : "" %>>Active</option>
+                                                        <option value="INACTIVE" <%= "INACTIVE".equals(user.getStatus()) ? "selected" : "" %>>Inactive</option>
+                                                        <option value="SUSPENDED" <%= "SUSPENDED".equals(user.getStatus()) ? "selected" : "" %>>Suspended</option>
+                                                    </select>
+                                                </form>
+                                            </td>
+                                        </tr>
                                         <% } %>
                                     </tbody>
                                 </table>
@@ -199,17 +206,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/admin.min.js"></script>
     <script>
-        function editUser(userId) {
-            // Implement edit functionality
-            alert('Edit user: ' + userId);
-        }
-
-        function deleteUser(userId) {
-            if (confirm('Are you sure you want to delete this user?')) {
-                // Implement delete functionality
-                alert('Delete user: ' + userId);
-            }
-        }
+        $(document).ready(function() {
+            $('#usersTable').DataTable();
+        });
     </script>
 </body>
 </html> 

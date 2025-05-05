@@ -9,16 +9,55 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileHandler {
-    private static final String BOOKINGS_FILE = "bookings.txt";
-    private static final String USERS_FILE = "users.txt";
+    private static final String DATABASE_DIR = "E:/OneDrive - Sri Lanka Institute of Information Technology/Y1S2/OOP/Project/Admin Management/Event Photography and Videography Booking System/src/main/webapp/Database";
+    private static final String BOOKINGS_FILE = DATABASE_DIR + "/bookings.txt";
+    private static final String USERS_FILE = DATABASE_DIR + "/users.txt";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
+    static {
+        // Create database directory if it doesn't exist
+        File dbDir = new File(DATABASE_DIR);
+        if (!dbDir.exists()) {
+            boolean created = dbDir.mkdirs();
+            if (!created) {
+                System.err.println("Failed to create database directory: " + DATABASE_DIR);
+            }
+        }
+        
+        // Create files if they don't exist
+        try {
+            File bookingsFile = new File(BOOKINGS_FILE);
+            if (!bookingsFile.exists()) {
+                bookingsFile.createNewFile();
+            }
+            
+            File usersFile = new File(USERS_FILE);
+            if (!usersFile.exists()) {
+                usersFile.createNewFile();
+            }
+        } catch (IOException e) {
+            System.err.println("Error creating database files: " + e.getMessage());
+        }
+    }
 
     // Booking operations
     public static void saveBooking(Booking booking) throws IOException {
-        try (FileWriter fw = new FileWriter(BOOKINGS_FILE, true);
+        File file = new File(BOOKINGS_FILE);
+        try (FileWriter fw = new FileWriter(file, true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
             out.println(booking.toString());
+        }
+    }
+
+    public static void saveBookings(List<Booking> bookings) throws IOException {
+        File file = new File(BOOKINGS_FILE);
+        try (FileWriter fw = new FileWriter(file);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+            for (Booking booking : bookings) {
+                out.println(booking.toString());
+            }
         }
     }
 
@@ -26,7 +65,6 @@ public class FileHandler {
         List<Booking> bookings = new ArrayList<>();
         File file = new File(BOOKINGS_FILE);
         if (!file.exists()) {
-            file.createNewFile();
             return bookings;
         }
 
@@ -53,10 +91,22 @@ public class FileHandler {
 
     // User operations
     public static void saveUser(User user) throws IOException {
-        try (FileWriter fw = new FileWriter(USERS_FILE, true);
+        File file = new File(USERS_FILE);
+        try (FileWriter fw = new FileWriter(file, true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
             out.println(user.toString());
+        }
+    }
+
+    public static void saveUsers(List<User> users) throws IOException {
+        File file = new File(USERS_FILE);
+        try (FileWriter fw = new FileWriter(file);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+            for (User user : users) {
+                out.println(user.toString());
+            }
         }
     }
 
@@ -64,7 +114,6 @@ public class FileHandler {
         List<User> users = new ArrayList<>();
         File file = new File(USERS_FILE);
         if (!file.exists()) {
-            file.createNewFile();
             return users;
         }
 
