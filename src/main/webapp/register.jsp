@@ -24,12 +24,12 @@
 <body>
 <div class="background"></div>
 <div class="container">
-    <!--<div class="content">
-        <h2 class="logo"><i class="fas fa-key"></i>Brand</h2>
+    <div class="content">
+        <h2 class="logo"><i class="fas fa-key"></i>Admin</h2>
         <div class="text-sci">
-            <h2><span>Create an Account</span></h2>
+            <h2><span>Create an Admin Account</span></h2>
         </div>
-    </div>-->
+    </div>
     <div class="logreg-box">
         <div class="form-container active">
             <div class="form-box">
